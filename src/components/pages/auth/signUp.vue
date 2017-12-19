@@ -32,7 +32,7 @@
   /* eslint-disable no-undef */
   /* eslint-disable no-unused-vars */
   /* eslint-disable object-shorthand */
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import authHeader from '@/components/shared/AuthHeader/authHeader'
   import VarInput from '@/components/shared/Input/VarInput'
   import image from '@/assets/login.jpg'
@@ -51,7 +51,16 @@
         }
       }
     },
-    computed: {},
+    computed: {
+      ...mapGetters({
+        isAuth: 'isAuth'
+      })
+    },
+    watch: {
+      isAuth() {
+        if (this.isAuth) this.$router.push({ path: '/home' })
+      }
+    },
     components: {
       VarInput,
       authHeader
