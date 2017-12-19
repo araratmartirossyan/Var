@@ -50,8 +50,8 @@ export const signUp = ({ commit, state }, { form }) => {
     })
     .then(() => {
       console.log('User created')
+      // dispatch('getUser')
     })
-    // dispatch('getUser')
   })
   .catch((error) => {
     console.log(error)
