@@ -3,7 +3,7 @@
     <auth-header/>
     <div class="login">
       <img class="login__image" src="../../../assets/logo.png"/>
-      <div v-for="(index, key) in loginParams" :key="key">
+      <div v-for="(index, key) in signUpParams" :key="key">
         <var-input
           :icon="index.icon"
           :placeholder="index.placeholder"
@@ -13,10 +13,10 @@
         />
       </div>  
       <div class="login-middle">
-        <button class="login-middle__btn" @click="login">Login</button>
+        <button class="login-middle__btn" @click="signUp">Sign Up</button>
       </div>
       <div class="login__links">
-        <router-link :to="'signUp'">Create account</router-link>
+        <router-link :to="'login'">Have an account?</router-link>
         <router-link :to="'signUp'">Need help?</router-link>
       </div>
       <div class="login-bottom">
@@ -36,16 +36,17 @@
   import authHeader from '@/components/shared/AuthHeader/authHeader'
   import VarInput from '@/components/shared/Input/VarInput'
   import image from '@/assets/login.jpg'
-  import { loginParams } from './loginMock'
-
+  import { signUpParams } from './signUpMock'
+  
   export default {
     name: 'login',
     data() {
       return {
         image,
-        loginParams,
+        signUpParams,
         form: {
           email: '',
+          name: '',
           password: ''
         }
       }
@@ -57,12 +58,15 @@
     },
     methods: {
       ...mapActions({
-        handleLogin: 'login'
+        handleSignUp: 'signUp'
       }),
       userInput(_val, _name) {
         switch (_name) {
           case 'email':
             this.form.email = _val
+            break
+          case 'name':
+            this.form.name = _val
             break
           case 'password':
             this.form.password = _val
@@ -71,9 +75,31 @@
             break
         }
       },
-      login() {
+      signUp() {
         const form = this.form
-        this.handleLogin({ form })
+        this.handleSignUp({ form })
+        // this.$store.commit('USER_SIGNUP', this.form)
+        // wilddog.auth().createUserWithEmailAndPassword(email, password)
+        // .then((user) => {
+        //   const ref = wilddog.sync().ref('users').child(user.uid)
+          // .set({
+          //   email: email,
+          //   displayName: this.reg.displayName,
+          //   uid: user.uid
+          // })
+          // .then(() => {
+          //   console.log('User updated')
+          //   // this.$router.push( { path: '/home'} )
+          // })
+        //   .catch((error) => {
+        //     console.warn(error)
+        //   })
+        // }).catch((error) => {
+        //   console.log(error)
+        // })
+      },
+      mounted() {
+        this.image
       }
     }
   }
