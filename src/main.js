@@ -3,6 +3,7 @@ import Vue from 'vue'
 import wilddog from 'wilddog'
 import App from './App'
 import router from './router'
+import store from './stores/index'
 
 Vue.config.productionTip = false
 const config = {
@@ -11,10 +12,25 @@ const config = {
 }
 
 wilddog.initializeApp(config)
-/* eslint-disable no-new */
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.mustAuth)) {
+    console.warn('AUTH:', store.getters.isAuth)
+    if (store.getters.isAuth) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+  next()
+})
+/* eslint-disable*/
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  created() {
+    this.$store.dispatch('getUser')
+  }
 })
