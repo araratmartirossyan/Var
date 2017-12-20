@@ -1,21 +1,190 @@
 <template>
-  <div style="padding: 20px;">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quis assumenda mollitia aut, excepturi dolorum sint maxime quos totam voluptatem obcaecati porro voluptates, ipsum eius iure minima suscipit ipsam exercitationem.
-    Temporibus, vero modi quaerat quos provident minima nostrum ad et adipisci voluptatibus, esse vel ex nesciunt. Similique quo, optio incidunt unde, pariatur id dolores eligendi laboriosam sequi illo cum ratione!
-    Illum corrupti assumenda cumque accusantium provident adipisci blanditiis, deleniti odit ex dolorem neque commodi perspiciatis in nemo perferendis, laborum, consectetur voluptatibus magni natus autem laudantium excepturi? Totam, corporis neque. Maiores.
-    Est repudiandae fuga vel autem hic! Fuga, quia impedit blanditiis illo odit veniam magnam tempore dicta aperiam amet doloribus ipsa saepe nostrum commodi rem officiis, molestias et quis! Velit, harum?
-    Cumque quis explicabo odit expedita vero, unde dolor temporibus, minima molestiae ab dolorem nihil sequi perspiciatis facere quia quod, quasi amet fuga beatae ipsa inventore quas laboriosam. Sunt, ipsam minus?
-    <router-link to="home">Home</router-link>
+  <div class="var-profile-wrapper">
+    <div v-if="user" class="var-profile" :style="getBackground">
+      <div class="var-profile__avatar-container">
+        <img class="image" :src="avatar"/>
+      </div>
+      <h3 class="name">
+        {{ user.name }}
+      </h3>
+      <div class="var-tabs">
+        <h5 class="var-tabs__tab" @click="choseTab('balance')">Balance</h5>
+        <h5 class="var-tabs__tab" @click="choseTab('transactions')">Transactions</h5>
+      </div>
+    </div>
+    <div class="profile-tab balance" v-if="profileTab === 'balance'">
+      <h2 class="amount">324</h2>
+    </div>
+    <div class="profile-tab" v-if="profileTab === 'transactions'">
+      <div class="single-transaction" v-for="(t,i) in transactions" :key="i">
+        <div class="single-transaction__header">
+          {{ t.date }} {{ t.time }}
+        </div>
+        <div class="single-transaction__body">
+          <div class="top">
+            <i v-if="t.type === 'input'" class="fa fa-level-up" style="color: green;"></i>
+            <i v-if="t.type === 'withdraw'" class="fa fa-level-down" style="color: red;"></i>
+            from {{ t.source }}
+          </div>
+          <div class="middle">
+            <div class="date">
+              <b>{{ t.type }} from {{ t.source }}</b>
+              <p>{{ t.date }} {{ t.time }}</p>
+            </div>
+            <h2 class="amount">{{ t.amount }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   /* eslint-disable no-undef */
+  import { mapGetters } from 'vuex'
+  import avatar from '@/assets/ryan.jpg'
+  import { transactions } from './transactionsMock'
+
   export default {
-    methods: {}
+    data() {
+      return {
+        avatar,
+        transactions,
+        profileTab: 'balance'
+      }
+    },
+    watch: {
+      profileTab() {}
+    },
+    computed: {
+      ...mapGetters({
+        user: 'user'
+      }),
+      getBackground() {
+        return 'background-image:' + this.getLinear + ', url(' + this.avatar + ');' + this.getBgPos
+      },
+      getLinear() {
+        return '-webkit-linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.8))'
+      },
+      getBgPos() {
+        return 'background-size:cover;background-position: center center;padding-top: 20px;height: auto;'
+      }
+    },
+    methods: {
+      choseTab(_tab) {
+        if (_tab === 'balance') this.profileTab = 'balance'
+        else if (_tab === 'transactions') this.profileTab = 'transactions'
+      }
+    }
   }
 </script>
 
 <style scoped lang="scss">
-  
+  .var-profile-wrapper {
+    
+    .var-profile {
+      text-align: center;
+      &__avatar-container {
+        width: 123px;
+        height: 123px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3);
+        .image {
+          max-width: 100%;
+          border-radius: 1px;
+          margin-bottom: 25px;
+        }
+      }
+      .name {
+        font-size: 2em;
+        text-align: center;
+        margin: 25px 0;
+        color: #fff;
+      }
+    }
+    .var-tabs {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      padding: 0 15%;
+      justify-content: space-between;
+      &__tab {
+        font-size: 20px;
+        text-align: center;
+        margin: 0 0 25px 0;
+        color: #fff;
+        width: 90px;
+        border-bottom: 1px solid #fff;
+        padding: 0 0 10px 0;
+      }
+    }
+  }
+  .profile-tab {
+    padding: 20px 10px 0 10px;
+    background: #eee;
+    height: 100%;
+    .single-transaction {
+      margin-bottom: 20px;
+      text-align: -webkit-center;
+      &__header {
+        background: rgb(194, 194, 194);
+        padding: 2px;
+        color: #fff;
+        border-radius: 2px;
+        width: 70px;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      &__body {
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background: #fff;
+        .top {
+          border-bottom: 1px solid #ddd;
+          padding: 15px;
+          text-align: -webkit-left;
+          color: #818181;
+        }
+        .middle {
+          border-bottom: 1px solid #ddd;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: #818181;
+          .date {
+            color: rgb(198, 198, 198);
+            display: flex;
+            flex-direction: column;
+            align-self: flex-start;
+            b {
+              margin: 0 0 5px 0;
+              color: #818181;
+              font-weight: 900;
+              text-transform: capitalize;
+            }
+            p {
+              margin: 0;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .balance {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      padding: 30% 0!important;
+      .amount {
+        font-size: 35px;
+      }
+    }
+  .amount::after {
+    content: '元';
+  }
 </style>
