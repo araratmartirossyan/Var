@@ -1,6 +1,6 @@
 <template>
   <div>
-    <auth-header/>
+    <auth-bg/>
     <div class="login">
       <img class="login__image" src="../../../assets/logo.png"/>
       <div v-for="(index, key) in signUpParams" :key="key">
@@ -33,7 +33,7 @@
   /* eslint-disable no-unused-vars */
   /* eslint-disable object-shorthand */
   import { mapActions, mapGetters } from 'vuex'
-  import authHeader from '@/components/shared/AuthHeader/authHeader'
+  import authBg from '@/components/shared/AuthBg/authBg'
   import VarInput from '@/components/shared/Input/VarInput'
   import image from '@/assets/login.jpg'
   import { signUpParams } from './signUpMock'
@@ -63,7 +63,7 @@
     },
     components: {
       VarInput,
-      authHeader
+      authBg
     },
     methods: {
       ...mapActions({
@@ -87,25 +87,6 @@
       signUp() {
         const form = this.form
         this.handleSignUp({ form })
-        // this.$store.commit('USER_SIGNUP', this.form)
-        // wilddog.auth().createUserWithEmailAndPassword(email, password)
-        // .then((user) => {
-        //   const ref = wilddog.sync().ref('users').child(user.uid)
-          // .set({
-          //   email: email,
-          //   displayName: this.reg.displayName,
-          //   uid: user.uid
-          // })
-          // .then(() => {
-          //   console.log('User updated')
-          //   // this.$router.push( { path: '/home'} )
-          // })
-        //   .catch((error) => {
-        //     console.warn(error)
-        //   })
-        // }).catch((error) => {
-        //   console.log(error)
-        // })
       },
       mounted() {
         this.image
@@ -166,8 +147,6 @@
       a {
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.8);
-        font-size: 12px;
-        font-weight: 600;
       }
     }
     &-bottom {

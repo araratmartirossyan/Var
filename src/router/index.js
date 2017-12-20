@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import login from '../components/pages/auth/login'
 import signUp from '../components/pages/auth/signUp'
 import home from '../components/pages/home/home'
+import profile from '../components/pages/profile/profile'
 
 Vue.use(Router)
 
@@ -26,9 +27,15 @@ export default new Router({
       meta: { mustAuth: true }
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: profile,
+      meta: { mustAuth: true }
+    },
+    {
       path: '*',
       name: 'Redirect',
-      redirect: '/login'
+      redirect: '/home'
     }
   ]
 })

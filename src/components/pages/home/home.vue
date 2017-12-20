@@ -1,6 +1,6 @@
 <template>
-  <div>
-    home
+  <div style="padding: 400px 0;background: #818181;">
+    <router-link to="profile">Profile</router-link>
     <button @click="logout">Logout</button>
   </div>
 </template>
