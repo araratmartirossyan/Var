@@ -1,6 +1,6 @@
 <template>
   <div>
-    <auth-header/>
+    <auth-bg/>
     <div class="login">
       <img class="login__image" src="../../../assets/logo.png"/>
       <div v-for="(index, key) in loginParams" :key="key">
@@ -33,7 +33,7 @@
   /* eslint-disable no-unused-vars */
   /* eslint-disable object-shorthand */
   import { mapActions, mapGetters } from 'vuex'
-  import authHeader from '@/components/shared/AuthHeader/authHeader'
+  import authBg from '@/components/shared/AuthBg/authBg'
   import VarInput from '@/components/shared/Input/VarInput'
   import image from '@/assets/login.jpg'
   import { loginParams } from './loginMock'
@@ -62,7 +62,7 @@
     },
     components: {
       VarInput,
-      authHeader
+      authBg
     },
     methods: {
       ...mapActions({
@@ -146,8 +146,6 @@
       a {
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.8);
-        font-size: 12px;
-        font-weight: 600;
       }
     }
     &-bottom {

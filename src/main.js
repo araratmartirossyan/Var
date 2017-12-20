@@ -4,6 +4,8 @@ import wilddog from 'wilddog'
 import App from './App'
 import router from './router'
 import store from './stores/index'
+import './assets/css/main.css'
+import './assets/fonts/font-import.css'
 
 Vue.config.productionTip = false
 const config = {
