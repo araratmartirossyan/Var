@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isAuth">
     <div :class="[showMenu ? 'wrapper-opened' : 'wrapper-closed']">
       <div :class="[showMenu ? 'toggle-wrapper-opened' : 'toggle-wrapper-closed']" @click="toggleMenu"></div>
       <div :class="[showMenu ? 'toggle-bg-opened' : 'toggle-bg-closed']"></div>
@@ -13,10 +13,8 @@
         </div>
         <div  class="menu-closed" :class="[showMenu ? 'menu-opened' : '']">
           <ul class="menu-ul">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
+            <li @click="toggleMenu"><router-link to="home">Home</router-link></li>
+            <li @click="toggleMenu"><router-link to="profile">Profile</router-link></li>
           </ul>
         </div>
         <!-- <p class="var-navbar__name">{{ user.name }}</p> -->
@@ -41,10 +39,10 @@
     },
     computed: {
       ...mapGetters({
-        user: 'user'
+        user: 'user',
+        isAuth: 'isAuth'
       }),
       showBars() {
-        console.log('!+', this.$route)
         const { name } = this.$route
         switch (name) {
           case 'profile':
@@ -111,10 +109,16 @@
       margin: 0;
       list-style-type: none;
       padding: 0;
+      padding-top: 15px;
       li {
-        padding: 0.625rem 30px;
+        padding: 15px 30px;
         color: #fff;
         text-align: left;
+        a {
+          color: #fff;
+          font-size: 20px;
+          text-transform: uppercase;
+        }
       }
     }
   }

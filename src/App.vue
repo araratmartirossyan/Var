@@ -46,6 +46,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   font-size: 18px;
+  font-weight: 600;
   color: #2c3e50;
 }
 
