@@ -11,12 +11,12 @@
         <div  class="menu-closed" :class="[showMenu ? 'menu-opened' : '']">
           <ul class="menu-ul">
             <li @click="toggleMenu">
-              <router-link to="profile">
+              <router-link :to="{ name: 'profile', params: { type: 'balance' }}">
                 <i class="fa fa-money"></i>
               </router-link>
             </li>
             <li @click="toggleMenu">
-              <router-link to="profile">
+              <router-link :to="{ name: 'profile', params: { type: 'transactions' }}">
                 <i class="fa fa-exchange"></i>
               </router-link>
             </li>
@@ -25,7 +25,7 @@
         <!-- <p class="var-navbar__name">{{ user.name }}</p> -->
       </div>
     </div>
-    <div class="bottom-tabs">
+    <div class="bottom-tabs" v-if="showBottomMenu">
       <router-link to="home">
         <i class="fa fa-map-marker"></i>
         <span style="margin-left:10px;">Map</span>
@@ -61,6 +61,26 @@
         const { name } = this.$route
         switch (name) {
           case 'profile':
+            return false
+            break
+          case 'signUp':
+            return false
+            break
+          case 'login':
+            return false
+            break
+          default:
+            return true
+            break
+        }
+      },
+      showBottomMenu() {
+        const { name } = this.$route
+        switch (name) {
+          case 'signUp':
+            return false
+            break
+          case 'login':
             return false
             break
           default:
