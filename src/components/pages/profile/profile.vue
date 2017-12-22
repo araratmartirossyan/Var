@@ -8,14 +8,26 @@
         {{ user.name }}
       </h3>
       <div class="var-tabs">
-        <h5 class="var-tabs__tab" @click="choseTab('balance')">Balance</h5>
-        <h5 class="var-tabs__tab" @click="choseTab('transactions')">Transactions</h5>
+        <h5 
+          class="var-tabs__tab"
+          :class="[activeTab === 'balance' ? 'active-tab' : '']"
+          @click="choseTab('balance')"
+        >
+          Balance
+        </h5>
+        <h5
+          class="var-tabs__tab"
+          :class="[activeTab === 'transactions' ? 'active-tab' : '']"
+          @click="choseTab('transactions')"
+        >
+          Transactions
+        </h5>
       </div>
     </div>
-    <div class="profile-tab balance" v-if="profileTab === 'balance'">
+    <div class="profile-tab balance" v-if="activeTab === 'balance'">
       <h2 class="amount">324</h2>
     </div>
-    <div class="profile-tab" v-if="profileTab === 'transactions'">
+    <div class="profile-tab" v-if="activeTab === 'transactions'">
       <div class="single-transaction" v-for="(t,i) in transactions" :key="i">
         <div class="single-transaction__header">
           {{ t.date }} {{ t.time }}
@@ -50,16 +62,20 @@
       return {
         avatar,
         transactions,
-        profileTab: 'balance'
+        activeTab: 'balance'
       }
     },
     watch: {
-      profileTab() {}
+      actTab() {}
     },
     computed: {
       ...mapGetters({
         user: 'user'
       }),
+      actTab() {
+        const { type } = this.$route.params
+        this.activeTab = type || 'balance'
+      },
       getBackground() {
         return 'background-image:' + this.getLinear + ', url(' + this.avatar + ');' + this.getBgPos
       },
@@ -72,14 +88,22 @@
     },
     methods: {
       choseTab(_tab) {
-        if (_tab === 'balance') this.profileTab = 'balance'
-        else if (_tab === 'transactions') this.profileTab = 'transactions'
+        // const { type } = this.$route.params
+        if (_tab === 'balance') this.activeTab = 'balance'
+        else if (_tab === 'transactions') this.activeTab = 'transactions'
       }
+    },
+    mounted() {
+      this.activeTab
     }
   }
 </script>
 
 <style scoped lang="scss">
+  .active-tab {
+    color: rgba(249,99,50,1)!important;
+    border-bottom: 2px solid rgba(249,99,50,1)!important;
+  }
   .var-profile-wrapper {
     
     .var-profile {
@@ -117,7 +141,7 @@
         margin: 0 0 25px 0;
         color: #fff;
         width: 90px;
-        border-bottom: 1px solid #fff;
+        border-bottom: 2px solid #fff;
         padding: 0 0 10px 0;
       }
     }
