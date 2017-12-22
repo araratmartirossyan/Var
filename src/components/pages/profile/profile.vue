@@ -103,6 +103,7 @@
   .active-tab {
     color: rgba(249,99,50,1)!important;
     border-bottom: 2px solid rgba(249,99,50,1)!important;
+    transition: ease-in-out all .2s;
   }
   .var-profile-wrapper {
     
@@ -143,6 +144,7 @@
         width: 90px;
         border-bottom: 2px solid #fff;
         padding: 0 0 10px 0;
+        transition: ease-in-out all .2s;
       }
     }
   }

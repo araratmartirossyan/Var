@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 const circleConfig = {
-  fillColor: 'red',
-  strokeColor: 'red',
-  fillOpacity: '0.3'
+  fillColor: '#f96332',
+  strokeColor: '#f96332',
+  fillOpacity: '0.6'
 }
 
 export { circleConfig }
