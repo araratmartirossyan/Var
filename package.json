@@ -17,6 +17,7 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "vue": "^2.5.2",
+    "vue-amap": "^0.4.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "wilddog": "^2.5.17"

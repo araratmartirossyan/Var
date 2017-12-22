@@ -49,7 +49,11 @@ module.exports = {
     'consistent-return': 0,
     'no-unreachable': 0,
     'no-console': 0,
-    'linebreak-style': 0
+    'linebreak-style': 0,
+    'no-plusplus': 0,
+    'no-mixed-operators': 0,
+    'object-shorthand': 0,
+    'quote-props': 0
   }
 }
 

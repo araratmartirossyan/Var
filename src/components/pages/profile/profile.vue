@@ -123,9 +123,9 @@
     }
   }
   .profile-tab {
-    padding: 20px 10px 0 10px;
+    padding: 20px 10px 13% 10px;
     background: #eee;
-    height: 100%;
+    min-height: 55vh;
     .single-transaction {
       margin-bottom: 20px;
       text-align: -webkit-center;
@@ -161,7 +161,7 @@
             flex-direction: column;
             align-self: flex-start;
             b {
-              margin: 0 0 5px 0;
+              margin: 5px 0;
               color: #818181;
               font-weight: 900;
               text-transform: capitalize;
@@ -180,6 +180,7 @@
       text-align: center;
       justify-content: center;
       padding: 30% 0!important;
+      min-height: 55vh;
       .amount {
         font-size: 35px;
       }
