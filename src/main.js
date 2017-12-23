@@ -1,11 +1,20 @@
 import 'font-awesome/css/font-awesome.min.css'
 import Vue from 'vue'
+import VueAMap from 'vue-amap'
 import wilddog from 'wilddog'
 import App from './App'
 import router from './router'
 import store from './stores/index'
 import './assets/css/main.css'
 import './assets/fonts/font-import.css'
+
+// Vue.component('el-amap', ElAmap)
+Vue.use(VueAMap)
+
+VueAMap.initAMapApiLoader({
+  key: '28966b6be8e4fa0e4c4f4c9b4bf8d3ce',
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'Autocomplete', 'PlaceSearch', 'Scale', 'OverView', 'ToolBar', 'MapType', 'PolyEditor', 'AMap.CircleEditor']
+})
 
 Vue.config.productionTip = false
 const config = {

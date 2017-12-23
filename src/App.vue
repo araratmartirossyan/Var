@@ -30,8 +30,11 @@
           case 'signUp':
             return 'padding-top: 0px;'
             break
+          case 'profile':
+            return 'padding-top: 0px;'
+            break
           default:
-            return 'padding-top: 71px;'
+            return 'padding-top: 55px;'
             break
         }
       }

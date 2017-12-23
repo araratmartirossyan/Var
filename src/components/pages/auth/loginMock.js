@@ -3,7 +3,7 @@ const loginParams = {
   email: {
     placeholder: 'Email',
     icon:'user',
-    type: 'text'
+    type: 'email'
   },
   password: {
     placeholder: 'Password',

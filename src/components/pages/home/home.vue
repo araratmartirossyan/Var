@@ -1,24 +1,28 @@
 <template>
-  <div style="padding: 400px 0;background: #818181;">
-    <router-link to="profile">Profile</router-link>
-    <button @click="logout">Logout</button>
+  <div class="map-container">
+    <var-map />
   </div>
 </template>
 
 <script>
-  /* eslint-disable no-undef */
+  import VarMap from '@/components/shared/Map/VarMap'
+
   export default {
-    methods: {
-      logout() {
-        wilddog.auth().signOut(() => {
-          localStorage.removeItem('uid')
-          this.$router.push({ path: '/login' })
-        })
-      }
+    components: {
+      VarMap
     }
   }
 </script>
 
 <style scoped lang="scss">
-  
+  .map-container {
+    padding: 55px 0 0 0;
+    background: #818181;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 93%;
+  }
 </style>

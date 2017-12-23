@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import login from '../components/pages/auth/login'
 import signUp from '../components/pages/auth/signUp'
 import home from '../components/pages/home/home'
+// import aMap from '../components/shared/Map/Map'
 import profile from '../components/pages/profile/profile'
 import scanner from '@/components/pages/scanner/scanner'
 
