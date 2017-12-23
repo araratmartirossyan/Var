@@ -5,6 +5,7 @@ import login from '../components/pages/auth/login'
 import signUp from '../components/pages/auth/signUp'
 import home from '../components/pages/home/home'
 import profile from '../components/pages/profile/profile'
+import scanner from '@/components/pages/scanner/scanner'
 
 Vue.use(Router)
 
@@ -30,6 +31,12 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: profile,
+      meta: { mustAuth: true }
+    },
+    {
+      path: '/scanner',
+      name: 'scanner',
+      component: scanner,
       meta: { mustAuth: true }
     },
     {

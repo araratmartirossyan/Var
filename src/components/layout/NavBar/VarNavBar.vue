@@ -1,7 +1,10 @@
 <template>
   <div v-if="isAuth">
     <div :class="[showMenu ? 'wrapper-opened' : 'wrapper-closed']">
-      <div :class="[showMenu ? 'toggle-wrapper-opened' : 'toggle-wrapper-closed']" @click="toggleMenu"></div>
+      <div 
+        :class="[showMenu ? 'toggle-wrapper-opened' : 'toggle-wrapper-closed']" 
+        @click="toggleMenu"
+      />
       <div :class="[showMenu ? 'toggle-bg-opened' : 'toggle-bg-closed']"></div>
       <div class="var-navbar" :class="[showMenu ? 'navbar-shrinked' : '']">
         <img class="var-navbar__logo" :src="logo"/>
@@ -13,8 +16,12 @@
         </div>
         <div  class="menu-closed" :class="[showMenu ? 'menu-opened' : '']">
           <ul class="menu-ul">
-            <li @click="toggleMenu"><router-link to="home">Home</router-link></li>
-            <li @click="toggleMenu"><router-link to="profile">Profile</router-link></li>
+            <li 
+              @click="toggleMenu"
+              v-for="(index, key) in menus"
+            >
+              <router-link :to="index.url">{{index.name}}</router-link>
+            </li>
           </ul>
         </div>
         <!-- <p class="var-navbar__name">{{ user.name }}</p> -->
@@ -29,14 +36,28 @@
   import logo from '@/assets/logo.png'
   import avatar from '@/assets/ryan.jpg'
 
-  export default {
-    data() {
-      return {
-        logo,
-        avatar,
-        showMenu: false
-      }
+  const menus = [
+    {
+      name: 'Home',
+      url: 'home'
     },
+    {
+      name: 'Profile',
+      url: 'profile'
+    },
+    {
+      name: 'Scanner',
+      url: 'scanner'
+    }
+  ]
+  
+  export default {
+    data: () => ({
+      logo,
+      avatar,
+      showMenu: false,
+      menus
+    }),
     computed: {
       ...mapGetters({
         user: 'user',

@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="parsePadding">
-    <var-nav-bar/>
-    <router-view/>
+    <var-nav-bar />
+    <router-view />
   </div>
 </template>
 

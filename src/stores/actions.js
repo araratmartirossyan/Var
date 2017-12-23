@@ -43,8 +43,8 @@ export const signUp = ({ commit, state }, { form }) => {
   wilddog.auth().createUserWithEmailAndPassword(email, password).then((user) => {
     wilddog.sync().ref('users').child(user.uid)
     .set({
-      email: email,
-      name: name,
+      email,
+      name,
       uid: user.uid,
       created_at: Date.now()
     })
