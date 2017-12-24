@@ -13,7 +13,13 @@
         />
       </div>  
       <div class="login-middle">
-        <button class="login-middle__btn" @click="login">Login</button>
+        <button 
+          class="login-middle__btn" 
+          @click="login"
+          @enter="login"
+        >
+          Login
+      </button>
       </div>
       <div class="login__links">
         <router-link :to="'signUp'">Create account</router-link>

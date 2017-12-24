@@ -5,6 +5,7 @@ import mutations from './mutations'
 import * as getters from './getters'
 import * as actions from './actions'
 import uix from './modules/uix'
+import marker from './modules/marker'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
   mutations,
   actions,
   modules: {
-    uix
+    uix,
+    marker
   },
   strict: true
 })

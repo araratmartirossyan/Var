@@ -47,9 +47,12 @@
       <router-link 
         v-for="(index, key) in menu"
         :to="index.url"
+        :key="key"
       >
         <i :class="[index.icon]"></i>
-        <span style="margin-left:10px;">{{index.name}}</span>
+        <span style="margin-left:10px;">
+          {{index.name}}
+        </span>
       </router-link>
     </div>
   </div>
@@ -58,16 +61,16 @@
 <script>
   /* eslint-disable no-undef */
   import { mapGetters } from 'vuex'
-  import { menu } from './data.mock'
   import logo from '@/assets/logo.png'
   import avatar from '@/assets/ryan.jpg'
+  import menu from './data.mock'
 
   export default {
     data() {
       return {
         logo,
         avatar,
-        menu,
+        menu: menu.menu,
         showMenu: false
       }
     },

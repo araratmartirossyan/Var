@@ -5,6 +5,7 @@ import wilddog from 'wilddog'
 import App from './App'
 import router from './router'
 import store from './stores/index'
+// import ArMarker from '../src/components/global'
 import './assets/css/main.css'
 import './assets/fonts/font-import.css'
 
@@ -34,13 +35,16 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+Vue.config.ignoredElements = ['a-scene', 'a-marker', 'a-box', 'a-camera-static', 'a-plane', 'a-anchor']
 /* eslint-disable*/
 new Vue({
   el: '#app',
   router,
   store,
   template: '<App/>',
-  components: { App },
+  components: { 
+    App
+  },
   created() {
     this.$store.dispatch('getUser')
   }

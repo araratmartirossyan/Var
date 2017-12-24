@@ -1,43 +1,49 @@
-
 <template>
-  <div class="body">
-    <a-scene embedded arjs='trackingMethod: best;'>
-      <a-anchor hit-testing-enabled='true'>
-        <a-plane
-          id="marker"
-          :src="image"  
-          position="0 0.5 0" 
-          segments-height="800" 
-          geometry="width: 4; height: auto;"
-        />
-      </a-anchor>
-      <a-camera-static />
-    </a-scene>
-  </div>
+  <ar-marker
+    v-if="marker"
+    :marker="marker"
+  />  
 </template>
 
 <script>
-// import 'aframe'
-// import ar from '../../../assets/js/a-frame.js'
 
 export default {
-  data: () => ({
-    image: 'http://oisooyqzw.bkt.clouddn.com/tmp_b50ed1e6d6c6ad07fd8f52693b76cce6.jpg'
-  }),
-  methods: {
-    fetchData() {
-      const ref = wilddog.sync().ref().child('points')
-      ref.once('value')
-      .then((data) => {
-        const point = Object.values(data.val())[0]
-        this.image = point.poster
-        console.log('this', this.image)
-      })
-      .catch(err => console.error('err', err))
-    }
+  computed: {
+    marker() { return this.$store.getters.marker }
   },
-  mounted() {
-    this.fetchData()
+  components: {
+    'arMarker': {
+      props: ['marker'],
+      data() {
+        return {
+          img: ''
+        }
+      },
+      template: `
+        <a-scene embedded arjs='trackingMethod: best;'>
+          <a-anchor hit-testing-enabled='true'>
+            <a-plane
+              src="4"
+              id="marker"
+              position="0 0.5 0"
+              segments-height="1500" geometry="width: 2; height: 4;"
+            />
+          </a-anchor>
+          <a-camera-static/>
+        </a-scene>`,
+      watch: {
+        marker() {
+          const marker = document.getElementById('marker')
+          marker.attributes[0].value = this.marker.poster
+          console.log(marker.attributes[0].value)
+        }
+      },
+      mounted() {
+        document.body.insertBefore(this.$el, document.body.firstChild)
+        const id = '-L0eMUf7HvIivTYm1rBb'
+        this.$store.dispatch('getMarker', id)
+      }
+    }
   }
 }
 </script>
@@ -46,6 +52,9 @@ export default {
   .body {
     height: 100vh;
     position: relative;
+  }
+  h2 {
+    margin-top: 120px;
   }
   .appendElement {
     width: 120px;

@@ -10,6 +10,21 @@
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
+  "stdlib": {
+    "build": "faaslang",
+    "name": "nakamura/var",
+    "timeout": 10000,
+    "publish": true,
+    "personalize": {
+      "keys": [],
+      "user": []
+    },
+    "scripts": {
+      "+http": "cross-env NODE_ENV=dev webpack --hide-modules --watch",
+      "preup": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    },
+    "source": "vue"
+  },
   "dependencies": {
     "aframe": "^0.7.1",
     "font-awesome": "^4.7.0",
