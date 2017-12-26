@@ -5,7 +5,6 @@ import wilddog from 'wilddog'
 import App from './App'
 import router from './router'
 import store from './stores/index'
-import serverStatic from 'server-static'
 // import ArMarker from '../src/components/global'
 import './assets/css/main.css'
 import './assets/fonts/font-import.css'
@@ -27,7 +26,6 @@ const config = {
 wilddog.initializeApp(config)
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.mustAuth)) {
-    console.warn('AUTH:', store.getters.isAuth)
     if (store.getters.isAuth) {
       next()
     } else {

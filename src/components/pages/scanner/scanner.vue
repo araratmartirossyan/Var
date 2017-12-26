@@ -2,6 +2,7 @@
   <ar-marker
     v-if="marker"
     :marker="marker"
+    :poster="poster"
   />  
 </template>
 
@@ -9,33 +10,36 @@
 
 export default {
   computed: {
-    marker() { return this.$store.getters.marker }
+    marker() { return this.$store.getters.marker },
+    poster() { return this.marker.poster }
   },
   components: {
     'arMarker': {
-      props: ['marker'],
+      props: ['marker', 'poster'],
       data() {
         return {
           img: ''
         }
       },
       template: `
-        <a-scene embedded arjs='trackingMethod: best;'>
+        <a-scene v-if="poster" embedded arjs='trackingMethod: best;'>
           <a-anchor hit-testing-enabled='true'>
             <a-plane
-              src="4"
+              :src="poster"
               id="marker"
               position="0 0.5 0"
-              segments-height="1500" geometry="width: 2; height: 4;"
+              segments-height="1500" geometry="width: 4; height: 6;"
             />
           </a-anchor>
-          <a-camera-static/>
+          <a-camera-static class="camera" />
         </a-scene>`,
       watch: {
         marker() {
-          const marker = document.getElementById('marker')
-          marker.attributes[0].value = this.marker.poster
-          console.log(marker.attributes[0].value)
+          if (this.marker) {
+            // const marker = document.getElementById('marker')
+            // marker.attributes[0].value = this.marker.poster
+            // console.log(marker.attributes)
+          }
         }
       },
       mounted() {
@@ -50,16 +54,35 @@ export default {
 
 <style>
   .body {
-    height: 100vh;
+    height: 100px;
+    width: 100px;
     position: relative;
   }
   h2 {
     margin-top: 120px;
   }
-  .appendElement {
+  .camera {
     width: 120px;
     height: 120px;
     background: #d23232;
     position: absolute;
   }
+  #featured {
+    position: absolute;
+    width: calc(100vh * (1000 / 562));    /*  video width / height  */
+    height: calc(100vw * (562 / 1000));   /*  video height / width  */
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
 </style>

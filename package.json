@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "aframe": "^0.7.1",
+    "express": "^4.16.2",
     "font-awesome": "^4.7.0",
     "node-sass": "^4.7.2",
     "ramda": "^0.25.0",
