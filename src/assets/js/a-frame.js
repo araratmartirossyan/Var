@@ -5605,7 +5605,7 @@ ARjs.Profile.prototype.reset = function () {
 	}
 
 	this.contextParameters = {
-		cameraParametersUrl: 'http://hannation.cn/camera_para.dat',
+		cameraParametersUrl: 'https://myfailemtions.github.io/var/src/assets/js/camera_para.dat',
 		detectionMode: 'mono',
 	}
 	this.defaultMarkerParameters = {
