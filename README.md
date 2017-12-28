@@ -1,4 +1,9 @@
 # InVarWeTrust #
 
+```
+npm install
+```
 
-### Hello for Var
+```
+npm run dev
+```
