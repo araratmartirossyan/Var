@@ -22,6 +22,13 @@
         >
           Transactions
         </h5>
+        <h5
+          class="var-tabs__tab"
+          :class="[activeTab === 'scanner' ? 'active-tab' : '']"
+          @click="toggleModal"
+        >
+          Scanner
+        </h5>
       </div>
     </div>
     <div class="profile-tab balance" v-if="activeTab === 'balance'">
@@ -48,6 +55,9 @@
         </div>
       </div>
     </div>
+    <div v-if="modalWindow" class="someModal">
+      <scanner></scanner>
+    </div>
   </div>
 </template>
 
@@ -56,14 +66,19 @@
   import { mapGetters } from 'vuex'
   import avatar from '@/assets/ryan.jpg'
   import { transactions } from './transactionsMock'
+  import scanner from '../scanner/scanner'
 
   export default {
     data() {
       return {
         avatar,
         transactions,
-        activeTab: 'balance'
+        activeTab: 'balance',
+        modalWindow: false
       }
+    },
+    components: {
+      scanner
     },
     watch: {
       actTab() {}
@@ -91,6 +106,11 @@
         // const { type } = this.$route.params
         if (_tab === 'balance') this.activeTab = 'balance'
         else if (_tab === 'transactions') this.activeTab = 'transactions'
+      },
+      toggleModal() {
+        this.activeTab = 'scanner'
+        console.log('object')
+        this.modalWindow = true
       }
     },
     mounted() {
@@ -100,6 +120,13 @@
 </script>
 
 <style scoped lang="scss">
+  .someModal {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 88vh;
+  }
   .active-tab {
     color: rgba(249,99,50,1)!important;
     border-bottom: 2px solid rgba(249,99,50,1)!important;

@@ -43,7 +43,11 @@ export default {
         }
       },
       mounted() {
-        document.body.insertBefore(this.$el, document.body.firstChild)
+        console.clear()
+        console.log(document.head)
+        console.log(window.innerWidth)
+        console.log(window.innerHeight)
+        // document.body.insertBefore(this.$el, document.body.firstChild)
         const id = '-L0eMUf7HvIivTYm1rBb'
         this.$store.dispatch('getMarker', id)
       }
@@ -53,17 +57,30 @@ export default {
 </script>
 
 <style>
+  .a-canvas {
+    width: 100%!important;
+    height: 90%!important;
+  }
+  a-scene {
+    height: 90%!important;
+  }
   .body {
     height: 100px;
     width: 100px;
+    position: relative;
+  }
+  body {
+    width: 375px!important;
+    height: 667px!important;
+    margin: 0!important;
     position: relative;
   }
   h2 {
     margin-top: 120px;
   }
   .camera {
-    width: 120px;
-    height: 120px;
+    width: 12px;
+    height: 12px;
     background: #d23232;
     position: absolute;
   }
@@ -81,8 +98,14 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100%!important;
+    height: 90vh!important;
+    margin: 0!important;
+    top: 25%!important;
+  }
+
+  @viewport { 
+    zoom: 0!important;
   }
 
 </style>

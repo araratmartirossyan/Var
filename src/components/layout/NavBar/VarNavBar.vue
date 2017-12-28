@@ -1,5 +1,6 @@
-<template>
+<template >
   <div v-if="isAuth">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <div  
       v-if="showTopMenu"
       :class="[showMenu ? 'wrapper-opened' : 'wrapper-closed']"
