@@ -41,6 +41,7 @@ export default {
         document.body.insertBefore(this.$el, document.body.firstChild)
         const id = '-L0eMUf7HvIivTYm1rBb'
         this.$store.dispatch('getMarker', id)
+        alert('pidr')
       }
     }
   }
