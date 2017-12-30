@@ -89,6 +89,7 @@
       login() {
         const form = this.form
         this.handleLogin({ form })
+        console.log(form, 'imrpotant')
       }
       // logout() {
       //   wilddog.auth().signOut(() => {
