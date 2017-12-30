@@ -1,14 +1,21 @@
 <template>
-  <ar-marker
-    v-if="marker"
-    :marker="marker"
-    :poster="poster"
-  />  
+  <div id="max">
+    <ar-marker
+      v-if="marker"
+      :marker="marker"
+      :poster="poster"
+    />
+  </div>
 </template>
 
 <script>
 
 export default {
+  data() {
+    return {
+      domStart: {}
+    }
+  },
   computed: {
     marker() { return this.$store.getters.marker },
     poster() { return this.marker.poster }
@@ -23,7 +30,7 @@ export default {
               :src="poster"
               id="marker"
               position="0 0.5 0"
-              segments-height="1500" geometry="width: 4; height: 6;"
+              segments-height="1500" geometry="width: 4; height: 4;"
             />
           </a-anchor>
           <a-camera-static class="camera" />
@@ -38,9 +45,23 @@ export default {
         }
       },
       mounted() {
-        document.body.insertBefore(this.$el, document.body.firstChild)
+        // const ele = document.getElementById('max')
+        // ele.appendChild(this.$el)
+        document.body.appendChild(this.$el)
         const id = '-L0eMUf7HvIivTYm1rBb'
         this.$store.dispatch('getMarker', id)
+      },
+      destroyed() {
+        const element = document.querySelector('video')
+        const debuger = document.getElementById('arjsDebugUIContainer')
+        const scene = document.querySelector('a-scene')
+        if (element) {
+          element.remove()
+          debuger.remove()
+          scene.remove()
+        }
+        const el = document.getElementById('app')
+        document.body.insertBefore(this.domStart, el)
       }
     }
   }
@@ -48,6 +69,7 @@ export default {
 </script>
 
 <style>
+ 
   .a-canvas {
     height: 100%;
     left: 0;
@@ -58,13 +80,9 @@ export default {
   a-scene {
     height: 100%!important;
   }
-  .body {
-    height: 100px;
-    width: 100px;
-    position: relative;
-  }
+
   body {
-    width: 375px!important;
+    width: 100%!important;
     height: 667px!important;
     margin: 0!important;
     position: relative;
@@ -100,16 +118,6 @@ export default {
   @viewport { 
     zoom: 0!important;
   }
-
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  height: 100vh;
-  position: relative;
-}
 
 #arjsDebugUIContainer {
     position: fixed;

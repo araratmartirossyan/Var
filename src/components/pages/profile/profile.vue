@@ -109,7 +109,6 @@
       },
       toggleModal() {
         this.activeTab = 'scanner'
-        console.log('object')
         this.modalWindow = true
       }
     },
@@ -120,6 +119,12 @@
 </script>
 
 <style scoped lang="scss">
+  body {
+    width: 375px!important;
+    height: 667px!important;
+    margin: 0!important;
+    position: relative;
+  }
   .someModal {
     position: absolute;
     top: 20px;
