@@ -41,7 +41,6 @@ export default {
         document.body.insertBefore(this.$el, document.body.firstChild)
         const id = '-L0eMUf7HvIivTYm1rBb'
         this.$store.dispatch('getMarker', id)
-        alert('pidr')
       }
     }
   }
@@ -50,11 +49,14 @@ export default {
 
 <style>
   .a-canvas {
-    width: 100%!important;
-    height: 90%!important;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 20px;
+    width: 100%;
   }
   a-scene {
-    height: 90%!important;
+    height: 100%!important;
   }
   .body {
     height: 100px;
@@ -88,13 +90,39 @@ export default {
   }
   video {
     position: absolute;
-    top: 0;
+    top: 10%;
     left: 0;
+    background: #000;
+    width: 100%!important;
     margin: 0!important;
+    height: 100vh!important;
   }
   @viewport { 
     zoom: 0!important;
   }
 
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  position: relative;
+}
 
+#arjsDebugUIContainer {
+    position: fixed;
+    color: grey;
+    border: 4px solid #d23232;
+    z-index: 9999;
+    top: 35%;
+    bottom: 0;
+    left: 0;
+    width: 200px!important;
+    height: 200px;
+    right: 0;
+    border-radius: 17px;
+    margin: 0 auto;
+}
 </style>

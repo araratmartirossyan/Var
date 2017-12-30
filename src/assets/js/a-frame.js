@@ -6595,23 +6595,18 @@ var ARjs = ARjs || {}
 ARjs.SessionDebugUI = function(arSession, tangoPointCloud){
 	var trackingBackend = arSession.arContext.parameters.trackingBackend
 
-	// this.domElement = document.createElement('div')
-	// this.domElement.style.color = 'rgba(0,0,0,0.9)'
-	// this.domElement.style.backgroundColor = 'rgba(127,127,127,0.5)'
-	// this.domElement.style.display = 'inline-block'
-	// this.domElement.style.padding = '0.5em'
-	// this.domElement.style.margin = '0.5em'
-	// this.domElement.style.textAlign = 'left'
+	this.domElement = document.createElement('div')
+	this.domElement.className = 'ocrloader'
+
 
 	//////////////////////////////////////////////////////////////////////////////
 	//		add title
 	//////////////////////////////////////////////////////////////////////////////
-	// var domElement = document.createElement('div')
-	// domElement.style.display = 'block'
-	// domElement.style.fontWeight = 'bold'
-	// domElement.style.fontSize = '120%'
-	// this.domElement.appendChild(domElement)
-	// domElement.innerHTML = 'AR.js Session Debug'
+	let emElement = document.createElement('em')
+	let spanElement = document.createElement('span')
+	this.domElement.appendChild(emElement)
+	this.domElement.appendChild(spanElement)
+	
 
 	//////////////////////////////////////////////////////////////////////////////
 	//		current-tracking-backend
@@ -8089,7 +8084,7 @@ AFRAME.registerComponent('arjs-anchor', {
 				if( containerElement === null ){
 					containerElement = document.createElement('div')
 					containerElement.id = 'arjsDebugUIContainer'
-					containerElement.setAttribute('style', 'position: fixed; bottom: 10px; width:100%; text-align: center; z-index: 1; color: grey;')
+					containerElement.setAttribute('style', 'position: fixed; bottom: 10px; text-align: center; ')
 					document.body.appendChild(containerElement)
 				}
 				// create anchorDebugUI
@@ -8507,7 +8502,7 @@ AFRAME.registerSystem('arjs', {
 				if( containerElement === null ){
 					containerElement = document.createElement('div')
 					containerElement.id = 'arjsDebugUIContainer'
-					containerElement.setAttribute('style', 'position: fixed; bottom: 10px; width:100%; text-align: center; z-index: 1;color: grey;')
+					containerElement.setAttribute('style', 'position: fixed;text-align: center; z-index: 1;color: grey;')
 					document.body.appendChild(containerElement)
 				}
 
