@@ -16,11 +16,6 @@ export default {
   components: {
     'arMarker': {
       props: ['marker', 'poster'],
-      data() {
-        return {
-          img: ''
-        }
-      },
       template: `
         <a-scene v-if="poster" embedded arjs='trackingMethod: best;'>
           <a-anchor hit-testing-enabled='true'>
@@ -36,18 +31,14 @@ export default {
       watch: {
         marker() {
           if (this.marker) {
-            // const marker = document.getElementById('marker')
-            // marker.attributes[0].value = this.marker.poster
-            // console.log(marker.attributes)
+            const marker = document.getElementById('marker')
+            marker.attributes[0].value = this.poster
+            console.log(marker.attributes)
           }
         }
       },
       mounted() {
-        console.clear()
-        console.log(document.head)
-        console.log(window.innerWidth)
-        console.log(window.innerHeight)
-        // document.body.insertBefore(this.$el, document.body.firstChild)
+        document.body.insertBefore(this.$el, document.body.firstChild)
         const id = '-L0eMUf7HvIivTYm1rBb'
         this.$store.dispatch('getMarker', id)
       }
@@ -98,14 +89,11 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%!important;
-    height: 90vh!important;
     margin: 0!important;
-    top: 25%!important;
   }
-
   @viewport { 
     zoom: 0!important;
   }
+
 
 </style>
