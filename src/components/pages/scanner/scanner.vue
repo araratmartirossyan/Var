@@ -31,9 +31,9 @@ export default {
       watch: {
         marker() {
           if (this.marker) {
-            const marker = document.getElementById('marker')
-            marker.attributes[0].value = this.poster
-            console.log(marker.attributes)
+            // const marker = document.getElementById('marker')
+            // marker.attributes[0].value = this.poster
+            // console.log(marker.attributes)
           }
         }
       },
