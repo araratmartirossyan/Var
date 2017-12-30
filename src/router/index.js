@@ -11,39 +11,42 @@ import scanner from '@/components/pages/scanner/scanner'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/login',
-      name: 'login',
-      component: login
-    },
-    {
-      path: '/signUp',
-      name: 'signUp',
-      component: signUp
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: home,
-      meta: { mustAuth: true }
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: profile,
-      meta: { mustAuth: true }
-    },
-    {
-      path: '/scanner',
-      name: 'scanner',
-      component: scanner,
-      meta: { mustAuth: true }
-    },
-    {
-      path: '*',
-      name: 'Redirect',
-      redirect: '/home'
-    }
-  ]
+    routes: [{
+            path: '/login',
+            name: 'login',
+            component: login
+        },
+        {
+            path: '/signUp',
+            name: 'signUp',
+            component: signUp
+        },
+        {
+            path: '/home',
+            name: 'home',
+            component: home,
+            meta: { mustAuth: true },
+            props: true
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: profile,
+            meta: { mustAuth: true },
+            props: true
+        },
+        {
+            path: '/scanner',
+            name: 'scanner',
+            component: scanner,
+            meta: { mustAuth: true },
+            props: true
+        },
+        {
+            path: '*',
+            name: 'Redirect',
+            redirect: '/home',
+            props: true
+        }
+    ]
 })

@@ -103,6 +103,9 @@ var Qb=[Ik,Zh,_h,Qj,Qi,Pi,Ri,Ag,sg,qg,rg,yg,kh,jh,Oi,Mj];var Rb=[Jk,ki,ji,gi];va
 		}
 	};
 
+
+
+
 	/**
 		Detects markers in the given image. The process method dispatches marker detection events during its run.
 
@@ -4409,7 +4412,7 @@ console.warn('OBSOLETE OBSOLETE! instead use THREEx.HitTestingPlane or THREEx.Hi
 THREEx.ARClickability.prototype.onResize = function(){
 	var sourceElement = this._sourceElement
 	var cameraPicking = this._cameraPicking
-	
+	console.log('resize')
 	var fullWidth = parseInt(sourceElement.style.width)
 	var fullHeight = parseInt(sourceElement.style.height)
 	cameraPicking.aspect = fullWidth / fullHeight;
@@ -4419,6 +4422,7 @@ THREEx.ARClickability.prototype.onResize = function(){
 THREEx.ARClickability.prototype.computeIntersects = function(domEvent, objects){
 	var sourceElement = this._sourceElement
 	var cameraPicking = this._cameraPicking
+	console.log('computeIntersects')
 
 	// compute mouse coordinatge with [-1,1]
 	var eventCoords = new THREE.Vector3();
@@ -4434,6 +4438,7 @@ THREEx.ARClickability.prototype.computeIntersects = function(domEvent, objects){
 }
 
 THREEx.ARClickability.prototype.update = function(){
+	console.log('update')
 
 }
 
@@ -4898,6 +4903,12 @@ THREEx.ArMarkerControls.prototype._initArtoolkit = function(){
 		}else{
 			console.log(false, 'invalid marker type', _this.parameters.type)
 		}
+
+			// arController.addEventListener('getMarker', function(ev) {
+			// 	console.log("Detected marker with ids:", ev.data.marker.id, ev.data.marker.idPatt, ev.data.marker.idMatrix);
+			// 	console.log("Marker data", ev.data.marker);
+			// 	console.log("Marker transform matrix:", [].join.call(ev.data.matrix, ', '));
+			// });
 
 		// listen to the event
 		arController.addEventListener('getMarker', function(event){
@@ -5603,7 +5614,7 @@ ARjs.Profile.prototype.reset = function () {
 		// to read from the webcam 
 		sourceType : 'webcam',
 	}
-
+	console.log('we get our function')
 	this.contextParameters = {
 		cameraParametersUrl: 'https://myfailemtions.github.io/var/src/assets/js/camera_para.dat',
 		detectionMode: 'mono',
@@ -5661,11 +5672,11 @@ ARjs.Profile.prototype.performance = function(label) {
 
 ARjs.Profile.prototype.defaultMarker = function (trackingBackend) {
 	trackingBackend = trackingBackend || this.contextParameters.trackingBackend
-
 	if( trackingBackend === 'artoolkit' ){
 		this.contextParameters.detectionMode = 'mono'
 		this.defaultMarkerParameters.type = 'pattern'
 		this.defaultMarkerParameters.patternUrl = THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro'
+		
 	}else if( trackingBackend === 'aruco' ){
 		this.contextParameters.detectionMode = 'mono'
 		this.defaultMarkerParameters.type = 'barcode'
@@ -5880,6 +5891,8 @@ ARjs.Source.prototype._initSourceVideo = function(onReady) {
 	}, 1000/50);
 	return domElement
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //          handle webcam source
@@ -6598,14 +6611,10 @@ ARjs.SessionDebugUI = function(arSession, tangoPointCloud){
 	this.domElement = document.createElement('div')
 	this.domElement.className = 'ocrloader'
 
-
 	//////////////////////////////////////////////////////////////////////////////
 	//		add title
 	//////////////////////////////////////////////////////////////////////////////
-	let emElement = document.createElement('em')
-	let spanElement = document.createElement('span')
-	this.domElement.appendChild(emElement)
-	this.domElement.appendChild(spanElement)
+
 	
 
 	//////////////////////////////////////////////////////////////////////////////

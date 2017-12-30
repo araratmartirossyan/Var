@@ -56,7 +56,7 @@
       </div>
     </div>
     <div v-if="modalWindow" class="someModal">
-      <scanner></scanner>
+      <!-- <scanner></scanner> -->
     </div>
   </div>
 </template>

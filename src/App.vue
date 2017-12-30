@@ -14,6 +14,28 @@
     components: {
       VarNavBar
     },
+    watch: {
+      '$route'(to, from) {
+        const debuger = document.getElementById('arjsDebugUIContainer')
+        const scene = document.getElementById('scene')
+        const element = document.querySelector('video')
+        if (from.name === 'scanner') {
+          scene.parentNode.removeChild(scene)
+          debuger.remove()
+          console.log('works?')
+          navigator.getUserMedia(
+            { audio: true, video: { width: 1280, height: 720 } },
+            (stream) => {
+              const video = document.querySelector('video')
+              video.srcObject = stream
+              stream.getTracks()[1].stop()
+              element.remove()
+            },
+            err => console.log(`The following error occurred: ${err.name}`)
+          )
+        }
+      }
+    },
     computed: {
       ...mapGetters({
         isAuth: 'isAuth'

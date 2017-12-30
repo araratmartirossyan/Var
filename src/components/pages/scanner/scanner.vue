@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -24,44 +25,44 @@ export default {
     'arMarker': {
       props: ['marker', 'poster'],
       template: `
-        <a-scene v-if="poster" embedded arjs='trackingMethod: best;'>
-          <a-anchor hit-testing-enabled='true'>
+        <a-scene v-if="poster" id="scene" embedded arjs='trackingMethod: best;'>
+          <a-anchor hit-testing-enabled='true' @click="action">
+            
             <a-plane
               :src="poster"
               id="marker"
               position="0 0.5 0"
-              segments-height="1500" geometry="width: 4; height: 4;"
-            />
+              segments-height="1500" 
+              geometry="width: 4; height: 4;"
+            >
+              <a-entity 
+                id="refresh-button" 
+                geometry="primitive: box" 
+                material="color: red" 
+                position="0 0 0"
+              />
+            </a-plane>
           </a-anchor>
           <a-camera-static class="camera" />
         </a-scene>`,
-      watch: {
-        marker() {
-          if (this.marker) {
-            // const marker = document.getElementById('marker')
-            // marker.attributes[0].value = this.poster
-            // console.log(marker.attributes)
-          }
-        }
-      },
       mounted() {
-        // const ele = document.getElementById('max')
-        // ele.appendChild(this.$el)
         document.body.appendChild(this.$el)
         const id = '-L0eMUf7HvIivTYm1rBb'
         this.$store.dispatch('getMarker', id)
       },
-      destroyed() {
-        const element = document.querySelector('video')
-        const debuger = document.getElementById('arjsDebugUIContainer')
-        const scene = document.querySelector('a-scene')
-        if (element) {
-          element.remove()
-          debuger.remove()
-          scene.remove()
+      computed: {
+        ...mapGetters({
+          hongbao: 'getHongbao',
+          user: 'user'
+        })
+      },
+      methods: {
+        ...mapActions({
+          handleSetHongbao: 'setHongbao'
+        }),
+        action() {
+          console.log('action')
         }
-        const el = document.getElementById('app')
-        document.body.insertBefore(this.domStart, el)
       }
     }
   }
@@ -89,12 +90,6 @@ export default {
   }
   h2 {
     margin-top: 120px;
-  }
-  .camera {
-    width: 12px;
-    height: 12px;
-    background: #d23232;
-    position: absolute;
   }
   #featured {
     position: absolute;
@@ -132,5 +127,25 @@ export default {
     right: 0;
     border-radius: 17px;
     margin: 0 auto;
+}
+
+.containerButton {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: 10%;
+}
+
+.hong_button {
+  width: 120px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  z-index: 9999;
+  position: absolute;
+  color: #fff;
+  background: #d23232;
+  bottom: 120px;
+  text-align: center;
 }
 </style>
